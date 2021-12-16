@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include('partials/header.ejs') -%>
+</head>
+<body>
+<h1><%= r.nome %></h1>
+<p>Ferie: <%= r.orari.ferie[0].value; %> / <%= r.orari.ferie[1].value; %> </p>
+
+<form action="/ristorante/ferie" method="POST">
+    <input type="date" name="ferie_da">
+    <input type="date" name="ferie_a">
+    <input type="submit">
+</form>
+
+<p>Orario Mattina: <%= r.orari.orari_mattina[0]; %> / <%= r.orari.orari_mattina[1]; %> </p>
+<p>Orario Pomeriggio: <%= r.orari.orari_pomeriggio[0]; %> / <%= r.orari.orari_pomeriggio[1]; %> </p>
+<form action="/ristorante/orari" method="POST">
+    <input type="time" name="orario_mattina_da">
+    <input type="time" name="orario_mattina_a">
+    <input type="time" name="orario_pomeriggio_da">
+    <input type="time" name="orario_pomeriggio_a">
+    <input type="submit">
+</form>
+</body>
+</html>
