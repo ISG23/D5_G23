@@ -1,4 +1,5 @@
 'use strict';
+import {Giorno} from '../../global.js';
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -12,6 +13,20 @@ module.exports = {
       createdAt: Sequelize.fn("NOW"), updatedAt: Sequelize.fn("NOW")
     }], {returning: true});
 
+    let today = new Date();
+
+
+    await queryInterface.bulkInsert('OrariRistoranti',[
+      {
+        id_ristorante: id_risto[0].id,
+        giorni_apertura: [Giorno.MAR.value, Giorno.MER.value, Giorno.GIO.value, Giorno.VEN.value, Giorno.SAB.value,Giorno.DOM.value],
+        orari_mattina: Sequelize.literal("'{11:30, 14:30}'"),
+        orari_pomeriggio: Sequelize.literal("'{18:30, 23:00}'"),
+        createdAt: Sequelize.fn('NOW'),
+        updatedAt: Sequelize.fn('NOW'),
+
+      }
+    ])
 
     let id_prodotti = await queryInterface.bulkInsert('Prodotti', [
       {

@@ -30,6 +30,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'id_ristorante',
         as: 'tavoli'
       });
+      this.hasOne(models.OrariRistorante,{
+        foreignKey: 'id_ristorante',
+        as: 'orari'
+      })
 
     }
   }
@@ -39,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
     indirizzo: DataTypes.STRING,
     numero_civico: DataTypes.STRING,
     partita_iva: DataTypes.STRING,
-    tipo_cucina: DataTypes.STRING
+    tipo_cucina: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Ristorante',
