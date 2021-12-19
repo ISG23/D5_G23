@@ -3,12 +3,10 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Tavoli', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      numero: {
+      numeroPersone: {
         type: Sequelize.INTEGER
       },
       id_ristorante: {

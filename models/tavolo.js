@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Tavolo.init({
-    numero: DataTypes.INTEGER,
+    numeroPersone: DataTypes.INTEGER,
     id_ristorante: DataTypes.INTEGER
   }, {
     sequelize,

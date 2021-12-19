@@ -16,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   OrariRistorante.init({
     id_ristorante: DataTypes.INTEGER,
     giorni_apertura: DataTypes.ARRAY(DataTypes.INTEGER),
-    orari_mattina: DataTypes.RANGE(DataTypes.TIME),
-    orari_pomeriggio: DataTypes.RANGE(DataTypes.TIME),
+    orari_mattina: DataTypes.ARRAY(DataTypes.TIME),
+    orari_pomeriggio: DataTypes.ARRAY(DataTypes.TIME),
     ferie: DataTypes.RANGE(DataTypes.DATE)
   }, {
     sequelize,

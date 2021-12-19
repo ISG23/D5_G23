@@ -7,6 +7,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var apiRouter = require('./routes/api');
+const swaggerUI = require("swagger-ui-express");
+const docs = require("./docs");
 
 var app = express();
 
@@ -23,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/ristorante', usersRouter);
 app.use('/api', apiRouter);
+app.use('/api/docs', swaggerUI.serve,swaggerUI.setup(docs));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
