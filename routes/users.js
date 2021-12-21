@@ -23,7 +23,7 @@ router.get('/',async function(req, res, next) {
       ],
       where: {id:1}
     });
-    return res.status(200).render('ristorante',{ r: r[0] });
+    return res.status(200).render('ristorante',{ r: r[0], ferie:[new Date(r[0].orari.ferie[0].value),new Date(r[0].orari.ferie[1].value)] });
   } catch (error) {
     return res.status(500).send(error.message);
   }

@@ -14,15 +14,15 @@ services:
       - app
   ristoeasy:
     build: .
+    depends_on:
+      - postgres
     ports:
-      - 8080:3000
+      - 5000:3000
     networks:
       - app
     environment:
-      DBHOST: postgres
-      DBUSER: postgres
-      DBPASSWORD: postgres
-      DBNAMe: ristoeasy
+      env: production
+
 
 networks:
   app:

@@ -22,6 +22,7 @@ module.exports = {
         giorni_apertura: [Giorno.MAR.value, Giorno.MER.value, Giorno.GIO.value, Giorno.VEN.value, Giorno.SAB.value,Giorno.DOM.value],
         orari_mattina: Sequelize.literal("'{11:30, 14:30}'"),
         orari_pomeriggio: Sequelize.literal("'{18:30, 23:00}'"),
+        ferie: Sequelize.literal("'[2021-12-24, 2021-12-27]'"),
         createdAt: Sequelize.fn('NOW'),
         updatedAt: Sequelize.fn('NOW'),
 
