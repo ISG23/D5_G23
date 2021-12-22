@@ -21,12 +21,17 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Tavolo.init({
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true
+    },
     numeroPersone: DataTypes.INTEGER,
     id_ristorante: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Tavolo',
-    tableName: 'Tavoli'
+    tableName: 'Tavoli',
+
   });
   return Tavolo;
 };

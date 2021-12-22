@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     n_persone: DataTypes.INTEGER,
     nome: DataTypes.STRING,
     data: DataTypes.DATE,
-    data_fine: DataTypes.DATE,
+    orario: DataTypes.TIME,
     stato: DataTypes.INTEGER,
     id_tavolo: DataTypes.INTEGER,
     id_ristorante: DataTypes.INTEGER,

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const { Ristorante, OrariRistorante, Tavolo } = require('../models')
+const { Ristorante, OrariRistorante, Tavolo,Prenotazione, Sequelize } = require('../models')
 
 /* GET users listing. */
 router.get('/',async function(req, res, next) {
@@ -54,7 +54,7 @@ router.post('/orari',async function(req, res, next) {
 
     await OrariRistorante.update(
         {
-          orario_mattina: orari_mattina_new,
+          orari_mattina: orari_mattina_new,
           orari_pomeriggio: orari_pomeriggio_new
         },
         {where: {id_ristorante: 1}}
@@ -65,56 +65,47 @@ router.post('/orari',async function(req, res, next) {
   }
 
 });
-router.post('/giorni_di_apertura',async function(req, res, next) {
-  //anagrafica ristorante
-  // Giorni di apertura
-  // Ferie
-  res.redirect("/ristorante")
-});
+router.post('/giorni',async function(req, res, next) {
+  try{
 
-// ORDINI
-router.get('/ordini', function(req, res, next) {
-  //completa e visualizza ordini
-  res.render('ordini')
+    let giorni = req.body.giorni.map(x=>+x);
+    await OrariRistorante.update(
+        {
+          giorni_apertura:  giorni,
+        },
+        {where: {id_ristorante:1}}
+    );
+    res.redirect('/ristorante');
+  }catch(e){
+    return res.status(500).send(e.message);
+  }
 });
-router.post('/ordini/:id', function(req, res, next) {
-  //completa e visualizza ordini
-  res.redirect("/ristorante/ordini")
-});
-
-// PRENOTAZIONI
-router.get('/prenotazioni', function(req, res, next) {
-  //visualizza prenotazioni(per tavolo)
-  res.render('prenotazioni');
-});
-router.post('/prenotazioni/:id', function(req, res, next) {
-  //modifica prenotazioni(per tavolo)
-  res.redirect("/ristorante/prenotazioni")
-});
-
 // TAVOLI
-router.post('/tavoli', function(req, res, next) {
-  //aggiungi un tavolo
-  res.render("tavoli")
-});
-router.post('/tavoli/delete/:id', function(req, res, next) {
-  //elimina tavolo
-  res.redirect("/ristorante/tavoli")
-});
+router.post('/tavoli', async function(req, res, next) {
+  try{
+    await Tavolo.create(
+        {
+          id: parseInt(req.body.id),
+          id_ristorante: 1,
+          numeroPersone: parseInt(req.body.numeroPersone)
+        }
+    );
+    res.redirect("/ristorante");
+  }catch (e) {
+    return res.status(500).json({success: false, e: error.message});
+  }
 
-// MENU
-router.get('/menu', function(req, res, next) {
-  //visualizza piatti
-  res.render("menu")
 });
-router.post('/menu', function(req, res, next) {
-  //aggiungi un piatto
-  res.redirect("/ristorante/menu")
-});
-router.get('/menu/delete/:id', function(req, res, next) {
-  //elimina piatto
-  res.redirect("/ristorante/menu")
-});
+router.get('/tavoli/delete/:id', async function(req, res, next) {
+  try{
+    await Tavolo.destroy({
+      where: {id: req.params.id, id_ristorante: 1}
+    })
+    res.redirect("/ristorante")
+  }catch (error) {
+    return res.status(500).json({success: false, e: error.message});
+  }
 
+});
 
 module.exports = router;

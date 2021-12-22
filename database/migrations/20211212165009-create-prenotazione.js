@@ -17,8 +17,8 @@ module.exports = {
       data: {
         type: Sequelize.DATE
       },
-      data_fine: {
-        type: Sequelize.DATE
+      orario: {
+        type: Sequelize.TIME
       },
       stato: {
         type: Sequelize.INTEGER

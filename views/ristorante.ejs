@@ -1,26 +1,95 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="it">
 <head>
-    <%- include('partials/header.ejs') -%>
+    <title>Gestione Ristorante: <%= r.nome %></title>
 </head>
 <body>
-<h1><%= r.nome %></h1>
-<p>Ferie: <%= r.orari.ferie[0].value; %> / <%= r.orari.ferie[1].value; %> </p>
-
-<form action="/ristorante/ferie" method="POST">
-    <input type="date" name="ferie_da">
-    <input type="date" name="ferie_a">
-    <input type="submit">
-</form>
-
-<p>Orario Mattina: <%= r.orari.orari_mattina[0]; %> / <%= r.orari.orari_mattina[1]; %> </p>
-<p>Orario Pomeriggio: <%= r.orari.orari_pomeriggio[0]; %> / <%= r.orari.orari_pomeriggio[1]; %> </p>
+<h1 align="center">Gestisci Ristorante: <%= r.nome %></h1>
+<hr>
+<h2>Apertura e Chiusura</h2>
+<hr>
+<p>&nbsp&nbsp
 <form action="/ristorante/orari" method="POST">
-    <input type="time" name="orario_mattina_da">
-    <input type="time" name="orario_mattina_a">
-    <input type="time" name="orario_pomeriggio_da">
-    <input type="time" name="orario_pomeriggio_a">
-    <input type="submit">
+    <input type="time" name="orario_mattina_da" placeholder="Orario Apertura 1" value="<%= r.orari.orari_mattina[0] %>">&nbsp&nbsp&nbsp
+    <input type="time" name="orario_mattina_a" placeholder="Orario Chiusura 1" value="<%= r.orari.orari_mattina[1] %>">&nbsp&nbsp&nbsp
+    <input type="time" name="orario_pomeriggio_da" placeholder="Orario Apertura 2"
+           value="<%= r.orari.orari_pomeriggio[0] %>">&nbsp&nbsp&nbsp
+    <input type="time" name="orario_pomeriggio_a" placeholder="Orario Chiusura 2"
+           value="<%= r.orari.orari_pomeriggio[1] %>">
+    <input type="submit" name="submit" value="Salva">
 </form>
+</p>
+<hr>
+<h2>Giorni Lavorativi</h2>
+<hr>
+<table width="75%" align="center" border="1">
+    <tr>
+        <form action="/ristorante/giorni" method="POST">
+            <td><input type="checkbox" <%= r.orari.giorni_apertura.includes(0) ? 'checked' : '' %> name="giorni"
+                       value="0"/> L
+            </td>
+            <td><input type="checkbox" <%= r.orari.giorni_apertura.includes(1) ? 'checked' : '' %> name="giorni"
+                       value="1"/> M
+            </td>
+            <td><input type="checkbox" <%= r.orari.giorni_apertura.includes(2) ? 'checked' : '' %> name="giorni"
+                       value="2"/> M
+            </td>
+            <td><input type="checkbox" <%= r.orari.giorni_apertura.includes(3) ? 'checked' : '' %> name="giorni"
+                       value="3"/> G
+            </td>
+            <td><input type="checkbox" <%= r.orari.giorni_apertura.includes(4) ? 'checked' : '' %> name="giorni"
+                       value="4"/> V
+            </td>
+            <td><input type="checkbox" <%= r.orari.giorni_apertura.includes(5) ? 'checked' : '' %> name="giorni"
+                       value="5"/> S
+            </td>
+            <td><input type="checkbox" <%= r.orari.giorni_apertura.includes(6) ? 'checked' : '' %> name="giorni"
+                       value="6"/> D
+            </td>
+            <td><input type="submit" name="submit" value="Salva"></td>
+        </form>
+</table>
+<hr>
+<h2>Ferie</h2>
+<hr>
+<p>&nbsp&nbsp
+<form action="/ristorante/ferie" method="POST">
+    <input type="date" name="ferie_da" placeholder="Inizio Chiusura Ferie"
+           value="<%= ferie[0].toISOString().split('T')[0] %>">&nbsp&nbsp&nbsp&nbsp
+    <input type="date" name="ferie_a" value="<%= ferie[1].toISOString().split('T')[0] %>"
+           placeholder="Fine Chiusura Ferie">
+    <input type="submit" name="submit" value="Salva">
+</form>
+</p>
+<hr>
+<h2>Gestione Tavoli>
+    <hr>
+    <table align="center" width="70%" border="1">
+        <tbody>
+        <tr bgcolor="#c0c0c0">
+            <td width="50%" align="center">Numero Tavolo</td>
+            <td width="30%" align="center">Numero Persone</td>
+            <td width="10%" align="center">Elimina</td>
+        </tr>
+        <% r.tavoli.forEach((tavolo, index)=>{%>
+            <tr align="center">
+                <td>Tavolo <%= tavolo.id %></td>
+                <td><%= tavolo.numeroPersone %></td>
+                <td>
+                    <form action="/ristorante/tavoli/delete/<%= tavolo.id %>">
+                        <input type="submit" value="-" />
+                    </form>
+            </tr>
+        <%}) %>
+
+        <tr align="center">
+            <form action="/ristorante/tavoli" method="POST">
+                <td>Nuovo Tavolo <input type="number" name="id" value=""></td>
+                <td><input type="number" name="numeroPersone" value=""></td>
+                <td><input type="submit" name="elimina" value="+"></td>
+            </form>
+        </tr>
+        </tbody>
+    </table>
 </body>
 </html>

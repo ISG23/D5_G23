@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* INDEX */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.redirect('/ristorante');
 });
 
 module.exports = router;

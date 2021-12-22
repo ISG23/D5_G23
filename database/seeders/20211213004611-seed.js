@@ -80,7 +80,7 @@ module.exports = {
       }], {returning: true})
 
     let id_tavoli = await queryInterface.bulkInsert('Tavoli', [{
-       id: 1,
+        id: 1,
         numeroPersone: 2,
         id_ristorante: id_risto[0].id,
        createdAt: Sequelize.fn("NOW"), updatedAt: Sequelize.fn("NOW")
@@ -103,7 +103,7 @@ module.exports = {
         n_persone: 2,
         nome: "BarBaz",
         data: Sequelize.fn("NOW"),
-        data_fine: new Date((new Date()).getTime() + 2*60*60*1000),
+        orario: new Date((new Date()).getTime() + 2*60*60*1000).toLocaleTimeString(),
         stato: 0,
         id_tavolo: id_tavoli[0].id,
         id_ristorante: id_risto[0].id,
@@ -114,7 +114,7 @@ module.exports = {
         n_persone: 3,
         nome: "FooBar",
         data: Sequelize.fn("NOW"),
-        data_fine: new Date((new Date()).getTime() + 60*60*1000),
+        orario: new Date((new Date()).getTime() + 60*60*1000).toLocaleTimeString(),
         stato: 0,
         id_tavolo: id_tavoli[1].id,
         id_ristorante: id_risto[0].id,
