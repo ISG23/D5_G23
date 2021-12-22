@@ -4,20 +4,29 @@
     "password": "postgres",
     "database": "ristoeasy",
     "host": "postgres",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "define": {
+        "timestamps": false
+    }
   },
   "test": {
     "username": "postgres",
     "password": "postgres",
     "database": "ristoeasy",
     "host": "postgres",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "define": {
+        "timestamps": false
+    }
   },
   "production": {
     "username": "postgres",
     "password": "postgres",
     "database": "ristoeasy",
     "host": "postgres",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "define": {
+        "timestamps": false
+    }
   }
 }

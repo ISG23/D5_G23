@@ -34,14 +34,6 @@ module.exports = {
       id_cliente: {
         type: Sequelize.INTEGER,
         //references: { model: 'Clienti', key: 'id' }
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
       }
     });
   },

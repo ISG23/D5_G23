@@ -54,7 +54,7 @@ module.exports = {
                 properties: {
                     id: {
                         type: "number", // data-type
-                        description: "Ristornte identification number", // desc
+                        description: "Ristorante identification number", // desc
                         example: 1, // example of an id
                     },
                     numeroPersone: {
@@ -214,10 +214,10 @@ module.exports = {
                         description: "Reservation date", // desc
                         example: "2021-12-23 19:30", // example of an id
                     },
-                    data_fine: {
-                        type: "date", // data-type
-                        description: "Reservation date", // desc
-                        example: "2021-12-23 21:30", // example of an id
+                    orario: {
+                        type: "time", // data-type
+                        description: "Reservation time", // desc
+                        example: "21:30:00", // example of an id
                     },
                     stato:  {
                         type: "number", // data-type
